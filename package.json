@@ -1,0 +1,30 @@
+{
+  "name": "lighthouse-quaggy",
+  "version": "0.0.2",
+  "main": "slackChannel.js",
+  "bin": {
+    "quaggy": "slackChannel.js"
+  },
+  "author": "Elliot Evans",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Elliot-Evans-95/quaggy/issues"
+  },
+  "homepage": "https://github.com/Elliot-Evans-95/quaggy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elliot-Evans-95/quaggy.git"
+  },
+  "keywords": [
+    "lighthouse",
+    "quaggy",
+    "slack",
+    "pharos",
+    "audit",
+    "metrics",
+    "notification"
+  ],
+  "devDependencies": {
+    "xmlhttprequest": "^1.8.0"
+  }
+}
