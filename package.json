@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-quaggy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "slackChannel.js",
   "bin": {
     "quaggy": "slackChannel.js"
@@ -24,7 +24,7 @@
     "metrics",
     "notification"
   ],
-  "devDependencies": {
+  "dependencies": {
     "xmlhttprequest": "^1.8.0"
   }
 }
