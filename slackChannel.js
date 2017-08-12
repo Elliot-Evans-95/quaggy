@@ -18,7 +18,7 @@ fs.readFile('.slackChannel', function(err, data) {
     return sendSlack(data.toString(), sites, useOutputFile)
 });
 
-function slackChannelLighthouseResult() {
+function slackChannelLighthouseResult(sites, outputFile) {
     const _currentTime = new Date().toLocaleString();
 
     useLighthouseSites(sites);
