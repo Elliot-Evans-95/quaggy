@@ -6,7 +6,7 @@ const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 module.exports = slackChannelLighthouseResult();
 
-fs.readFile('file.txt', function(err, data) {
+fs.readFile('.slackChannel', function(err, data) {
     if(err) {
         console.error(err);
         process.exit(1);
@@ -18,7 +18,7 @@ fs.readFile('file.txt', function(err, data) {
     return sendSlack(data.toString(), sites, useOutputFile)
 });
 
-function slackChannelLighthouseResult(sites, outputFile) {
+function slackChannelLighthouseResult() {
     const _currentTime = new Date().toLocaleString();
 
     useLighthouseSites(sites);
