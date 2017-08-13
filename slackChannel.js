@@ -4,7 +4,20 @@
 const fs = require('fs');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = slackChannelLighthouseResult();
+module.exports = function (sites, useOutputFile) {
+    console.log('SITES:', sites);
+    console.log('FILES:', useOutputFile);
+    findSites(sites);
+    findOutputFiles(useOutputFile);
+};
+
+function findSites(sites) {
+    return sites;
+}
+
+function findOutputFiles(useOutputFile) {
+    return useOutputFile;
+}
 
 fs.readFile('.slackChannel', function(err, data) {
     if(err) {
@@ -12,10 +25,10 @@ fs.readFile('.slackChannel', function(err, data) {
         process.exit(1);
     }
 
-    let sites = 'YEOMAN';
-    let useOutputFile = 'filename.json';
+    let getSites = findSites();
+    let getFileOutput = findOutputFiles();
 
-    return sendSlack(data.toString(), sites, useOutputFile)
+    return sendSlack(data.toString(), getSites, getFileOutput)
 });
 
 function slackChannelLighthouseResult(sites, outputFile) {
@@ -38,15 +51,18 @@ function sendSlack(webHook, sites, useOutputFile) {
 }
 
 function useLighthouseSites(sites) {
-    if(sites === undefined || sites === null) {
-        sites = 'test';
-    }
+    parameterErrorHandler(sites, 'sites');
     return sites;
 }
 
 function useOutputFileName(outputFile) {
-    if(outputFile === undefined || outputFile === null) {
-        outputFile = '30';
-    }
+    parameterErrorHandler(outputFile, 'output file');
     return outputFile;
+}
+
+function parameterErrorHandler(param, name) {
+    if(param === undefined || param === null) {
+        console.error(`Unable to find ${name}`);
+        process.exit(1);
+    }
 }

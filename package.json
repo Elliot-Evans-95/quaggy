@@ -1,6 +1,6 @@
 {
   "name": "lighthouse-quaggy",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "slackChannel.js",
   "bin": {
     "quaggy": "slackChannel.js"
