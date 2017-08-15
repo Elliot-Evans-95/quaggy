@@ -4,11 +4,9 @@
 const fs = require('fs');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = getData();
+module.exports = getData(getSites,  getUseOutputFile);
 
-function getData() {
-    let getSites =  'https://airhorner.com/';
-    let getUseOutputFile = 'https://airhorner.com.json';
+function getData(getSites, getUseOutputFile) {
 
     let getWebHook = findFileForWebHook('.slackChannel', function(data) {
         return data.toString();
