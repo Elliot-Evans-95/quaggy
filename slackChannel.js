@@ -4,50 +4,40 @@
 const fs = require('fs');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = function (sites, useOutputFile) {
-    console.log('SITES:', sites);
-    console.log('FILES:', useOutputFile);
-    findSites(sites);
-    findOutputFiles(useOutputFile);
-};
+module.exports = getData();
 
-function findSites(sites) {
-    return sites;
+function getData() {
+    let getSites =  'https://airhorner.com/';
+    let getUseOutputFile = 'https://airhorner.com.json';
+
+    let getWebHook = findFileForWebHook('.slackChannel', function(data) {
+        return data.toString();
+    });
+
+    let sites = useLighthouseSites(getSites);
+    let outputFile = useOutputFileName(getUseOutputFile);
+    let webHook = useWebHook(getWebHook);
+
+    buildMessage(sites, outputFile, webHook);
 }
 
-function findOutputFiles(useOutputFile) {
-    return useOutputFile;
+function findFileForWebHook(filePath){
+    return fs.readFileSync(filePath);
 }
 
-fs.readFile('.slackChannel', function(err, data) {
-    if(err) {
-        console.error(err);
-        process.exit(1);
-    }
-
-    let getSites = findSites();
-    let getFileOutput = findOutputFiles();
-
-    return sendSlack(data.toString(), getSites, getFileOutput)
-});
-
-function slackChannelLighthouseResult(sites, outputFile) {
+function buildMessage(sites, outputFile, webHook) {
     const _currentTime = new Date().toLocaleString();
+    let message = JSON.stringify({"text": `Date & Time: ${_currentTime} \n URL: ${sites} \n Result: ${outputFile}`});
 
-    useLighthouseSites(sites);
-    useOutputFileName(outputFile);
-
-    return JSON.stringify({"text": `Date & Time: ${_currentTime} \n URL: ${sites} \n Result: ${outputFile}`});
+    sendSlack(webHook, message);
 }
 
-function sendSlack(webHook, sites, useOutputFile) {
-
+function sendSlack(getWebHook, message) {
     const _request = new XMLHttpRequest();
-    let _slack = slackChannelLighthouseResult(sites, useOutputFile);
 
-    _request.open('POST', webHook, true);
+    _request.open('POST', getWebHook, true);
     _request.setRequestHeader('Content-Type', 'application/json');
-    _request.send(_slack);
+    _request.send(message);
 }
 
 function useLighthouseSites(sites) {
@@ -58,6 +48,11 @@ function useLighthouseSites(sites) {
 function useOutputFileName(outputFile) {
     parameterErrorHandler(outputFile, 'output file');
     return outputFile;
+}
+
+function useWebHook(webHook) {
+    parameterErrorHandler(webHook, 'webhook');
+    return webHook;
 }
 
 function parameterErrorHandler(param, name) {
