@@ -4,7 +4,7 @@
 const fs = require('fs');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-module.exports = getData(getSites,  getUseOutputFile);
+module.exports = getData;
 
 function getData(getSites, getUseOutputFile) {
 
