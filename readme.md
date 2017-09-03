@@ -1,4 +1,4 @@
-# Quaggy
+# Quaggy ![Travis Badge Image](https://travis-ci.org/Elliot-Evans-95/quaggy.svg?branch=master)
 
 ## Adds Slack integration into google's 'lighthouse' project
 
