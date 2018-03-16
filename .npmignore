@@ -1,1 +1,3 @@
 *.html
+.idea/
+node_module
